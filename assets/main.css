@@ -1,0 +1,9 @@
+/* A Simple Example to showcase some CSS in loom */
+#background {
+    width: 640;
+    height: 1136;
+}
+#pauseButton {
+    x: 525;
+    y: 740;
+}

@@ -1,0 +1,7 @@
+<totd.views.GameOverlayView>
+
+    <loom.css.StyleSheet source="assets/main.css"/>
+
+    <loom2d.ui.SimpleButton id="pauseButton" styleName="pauseButton" upImage="assets/logo.png" downImage="assets/logo.png" />
+
+</totd.views.GameOverlayView>

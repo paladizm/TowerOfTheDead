@@ -1,0 +1,9 @@
+<totd.views.MainMenuView>
+
+    <loom.css.StyleSheet source="assets/main.css"/>
+
+    <loom2d.display.Image id="background" styleName="background" source="assets/images/MenuView.png"/>
+
+    <loom2d.ui.SimpleButton id="playButton" styleName="playButton" upImage="assets/Button.png" downImage="assets/ButtonDown.png"/>
+    
+</totd.views.MainMenuView>

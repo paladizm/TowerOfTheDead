@@ -6,7 +6,7 @@ package totd.gameplay
    {
       public var x:Number = 0;
       public var y:Number = 0;
-      public var speed:Number = -20;
+      public var speed:Number = -15;
       public var scale:Number = 1;
       public var stageHeight:Number = 0;
       public var stageWidth:Number = 0;

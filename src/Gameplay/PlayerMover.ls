@@ -33,7 +33,7 @@ package totd.gameplay
       }
 
       private function hitTweenComplete(tween:LoomTween){
-        LoomTween.to(this, 3.0, {"speed": 0, "ease": LoomEaseType.EASE_OUT}).onComplete += hitTweenComplete2;
+        LoomTween.to(this, 2.0, {"speed": 0, "ease": LoomEaseType.EASE_OUT_BOUNCE}).onComplete += hitTweenComplete2;
       }
 
       private function hitTweenComplete2(tween:LoomTween){

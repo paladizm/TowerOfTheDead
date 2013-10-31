@@ -134,7 +134,7 @@ package totd.gameplay
             enemyMover.stageHeight = playfield.stage.stageHeight;
             enemyMover.stageWidth = playfield.stage.stageWidth;
             enemyMover.placeRandomly();
-            enemyMover.scale = 1;
+            enemyMover.scale = .75;
             enemyMover.renderer = enemyRenderer; 
             enemies.pushSingle(enemyMover);
             enemyGameObject.addComponent(enemyMover, "mover");
@@ -173,6 +173,7 @@ package totd.gameplay
          playerRenderer.addBinding("y", "@mover.y");
          playerRenderer.addBinding("scale", "@mover.scale");
          playerRenderer.addBinding("falling", "@mover.falling");
+         playerRenderer.mover = playerMover;
          playerGameObject.addComponent(playerRenderer, "renderer");
       }
 

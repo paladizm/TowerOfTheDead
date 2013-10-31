@@ -10,6 +10,8 @@ package totd.gameplay
    import loom2d.events.Touch;
    import loom2d.events.TouchEvent;
    import loom2d.events.TouchPhase;
+    
+   import loom2d.ui.SimpleLabel;
 
    import loom2d.math.Point;
 
@@ -47,6 +49,9 @@ package totd.gameplay
       public var playerGameObject:LoomGameObject;
       public var playerTargetX:Number;
       public var playerTargetY:Number;
+
+      public var score:Number;
+      public var scoreLabel:SimpleLabel;
 
       public var enemies:Vector.<EnemyMover>;
       public var enemyPool:Vector.<LoomGameObject>;
@@ -98,6 +103,14 @@ package totd.gameplay
          timeManager.addAnimatedObject(this);
          spawnTimer.start();
 
+
+         scoreLabel = new SimpleLabel("assets/impact.fnt");
+         scoreLabel.text = "0";
+         scoreLabel.x = playfield.stage.stageWidth - (scoreLabel.width+20);
+         scoreLabel.y = 2;
+         score = 0;
+         overlay.addChild(scoreLabel);
+
          playfield.stage.addEventListener(TouchEvent.TOUCH, onTouchBegin);
       }
 
@@ -105,6 +118,15 @@ package totd.gameplay
       {
          t.reset();
          createEnemy();
+
+         //Eventually Make a new score timer due to the fact that onFrame
+         //fails hard.
+         if (!playerMover.falling){
+            score += 10;
+            scoreLabel.text = score.toString();
+            scoreLabel.x = playfield.stage.stageWidth - (scoreLabel.width+20);
+         }
+
          t.start();
       }
 
@@ -245,6 +267,7 @@ package totd.gameplay
 
 
          playfield.removeChild(enemyBatch);
+         overlay.removeChild(scoreLabel);
       }
 
       public function onFrame():void

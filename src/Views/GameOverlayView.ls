@@ -3,6 +3,10 @@ package totd.views
     import totd.ui.View;
     import totd.ui.ViewCallback;
     import loom2d.ui.SimpleButton;
+    import loom2d.ui.SimpleLabel;
+    import loom2d.textures.Texture;
+    import loom2d.display.Image;  
+    import loom2d.display.DisplayObjectContainer;
 
     import loom.lml.LML;
     import loom.lml.LMLDocument;
@@ -12,10 +16,9 @@ package totd.views
      */
     class GameOverlayView extends View
     {
-        [Bind]
-        public var pauseButton:SimpleButton;
-
         public var onPause:ViewCallback;
+
+        public var scoreLabel:SimpleLabel;
 
         public function GameOverlayView()
         {
@@ -34,7 +37,7 @@ package totd.views
 
         protected function onLMLCreated()
         {
-            pauseButton.onClick = onClick;
+
         }
     }
 }

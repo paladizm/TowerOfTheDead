@@ -65,8 +65,12 @@ package totd.gameplay
       public var spawnTimer:Timer;
       public var spawnRate:Number;
 
+      //Lightning 
       public var lightningTimer:Timer;
       public var lightning:Quad; 
+
+      //Life
+      public var lives:Vector.<Image>;
 
       //Game Over
       public var onFinished:TowerLevelCompletionCallback;
@@ -123,12 +127,40 @@ package totd.gameplay
          spawnTimer.start();
          lightningTimer.start();
 
+         //Add Score
          scoreLabel = new SimpleLabel("assets/impact.fnt");
          scoreLabel.text = "0";
          scoreLabel.x = playfield.stage.stageWidth - (scoreLabel.width+20);
          scoreLabel.y = 2;
          score = 0;
          overlay.addChild(scoreLabel);
+
+         //Add Lives
+         lives = new Vector.<Image>();
+         var life1:Image = new Image(Texture.fromAsset("assets/images/life.png"));
+         life1.pivotX = life1.width *0.5;
+         life1.pivotY = life1.height *0.5;
+         life1.x = life1.width + 10;
+         life1.y = life1.height + 10;
+         overlay.addChild(life1);
+
+         var life2:Image = new Image(Texture.fromAsset("assets/images/life.png"));
+         life2.pivotX = life2.width *0.5;
+         life2.pivotY = life2.height *0.5;
+         life2.x = life1.x + life2.width + 10;
+         life2.y = life1.y;
+         overlay.addChild(life2);
+
+         var life3:Image = new Image(Texture.fromAsset("assets/images/life.png"));
+         life3.pivotX = life3.width *0.5;
+         life3.pivotY = life3.height *0.5;
+         life3.x = life2.x + life3.width + 10;
+         life3.y = life1.y;
+         overlay.addChild(life3);
+
+         lives.pushSingle(life1);
+         lives.pushSingle(life2);
+         lives.pushSingle(life3);
 
          playfield.stage.addEventListener(TouchEvent.TOUCH, onTouchBegin);
       }
@@ -296,8 +328,8 @@ package totd.gameplay
          parallaxLayer2.destroy();
          super.destroy();
 
-
          playfield.removeChild(enemyBatch);
+         playfield.removeChild(lightning);
          overlay.removeChild(scoreLabel);
       }
 
@@ -306,7 +338,6 @@ package totd.gameplay
          if (gameOver)
             return;
          else{   
-
             collisionDetection();
 
             if (playerMover.HP <= 0){
@@ -317,6 +348,11 @@ package totd.gameplay
                 onFinished();
                 return;
             }
+            else if (playerMover.HP < lives.length)
+            {
+                //Lose a life
+                overlay.removeChild(lives.pop());
+            }
 
             for (var i=0; i<enemyGameObjects.length; i++){
                 var lgo = enemyGameObjects[i];
@@ -326,15 +362,6 @@ package totd.gameplay
                 if(mover.y > (playfield.stage.stageHeight + renderer.enemy.height) && !mover.stopped){
                     mover.stopped = true;
                     enemyPool.pushSingle(lgo);
-
-                    // Destruction of elements every time caused memory leak
-                    // TODO: Figure out why...
-
-                    //mover.renderer.doRemove();
-                    //mover.doRemove();
-                    //enemies.remove(mover);
-                    //lgo.destroy();
-                    //enemyGameObjects.remove(lgo);
                 }
             }
          }
@@ -361,7 +388,6 @@ package totd.gameplay
          imageList.pushSingle(image);
          imageList.pushSingle(image2);
          imageList.pushSingle(image3);
-
 
          for (var i=0; i<imageList.length; i++){
             var q = imageList[i];

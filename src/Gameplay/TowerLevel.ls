@@ -75,17 +75,17 @@ package totd.gameplay
          createPlayer();
 
          this.owningGroup.registerManager(playerMover, null, "playerMover");
-         parallaxLayer2 = new Parallax(); 
-         parallaxLayer2.owningGroup = this.owningGroup;
-         parallaxLayer2.imageList = towerBackground();
-         parallaxLayer2.parallax = 0.5;
-         parallaxLayer2.initialize();
-
          parallaxLayer1 = new Parallax(); 
          parallaxLayer1.owningGroup = this.owningGroup;
-         parallaxLayer1.imageList = towerBuilder();
-         parallaxLayer1.parallax = 1;
+         parallaxLayer1.displayObjectList = towerBackground();
+         parallaxLayer1.parallax = 0.5;
          parallaxLayer1.initialize();
+
+         parallaxLayer2 = new Parallax(); 
+         parallaxLayer2.owningGroup = this.owningGroup;
+         parallaxLayer2.displayObjectList = towerBuilder();
+         parallaxLayer2.parallax = 1;
+         parallaxLayer2.initialize();
 
          playerGameObject.initialize();
 
@@ -119,8 +119,7 @@ package totd.gameplay
          t.reset();
          createEnemy();
 
-         //Eventually Make a new score timer due to the fact that onFrame
-         //fails hard.
+         //Eventually Make a new score timer 
          if (!playerMover.falling){
             score += 10;
             scoreLabel.text = score.toString();

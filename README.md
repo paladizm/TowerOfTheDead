@@ -50,3 +50,5 @@ Here are some things this could benifit from:
 - Resource Manager
 - Refactoring for readability and optimization
 
+That being said feel free to use this code in your projects!
+

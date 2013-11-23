@@ -1,13 +1,9 @@
 package totd.views
 {
    import totd.ui.View;
-   import loom2d.ui.SimpleLabel;
-   import loom2d.display.Sprite;
-
-   import loom.gameframework.LoomGroup;
-
    import totd.gameplay.TowerLevel;
 
+   import loom.gameframework.LoomGroup;
    import loom2d.display.DisplayObjectContainer;
 
    /**

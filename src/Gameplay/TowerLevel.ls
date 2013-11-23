@@ -1,8 +1,13 @@
 package totd.gameplay
 {
+   import totd.utils.Parallax;
+   import totd.gameplay.PlayerRenderer;
+   import totd.gameplay.PlayerMover;
+   import totd.gameplay.EnemyRenderer;
+
+   import totd.gameplay.EnemyMover;
    import loom2d.display.DisplayObjectContainer;
    import loom2d.display.Sprite;
-   import loom2d.display.Quad;
    import loom2d.display.Image;
    import loom2d.textures.Texture;
 
@@ -24,12 +29,6 @@ package totd.gameplay
 
    import loom.animation.LoomTween;
    import loom.animation.LoomEaseType;
-
-   import totd.utils.Parallax;
-   import totd.gameplay.PlayerRenderer;
-   import totd.gameplay.PlayerMover;
-   import totd.gameplay.EnemyRenderer;
-   import totd.gameplay.EnemyMover;
 
    delegate TowerLevelCompletionCallback():void;
 

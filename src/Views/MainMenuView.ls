@@ -10,7 +10,6 @@ package totd.views
     import loom2d.display.Image;
 
     import loom2d.ui.SimpleButton;
-    import loom2d.ui.TextureAtlasSprite;
    /**
      * Startup view; provides main menu.
      */
@@ -38,10 +37,11 @@ package totd.views
             // add to the screen
             super.enter(owner);
 
+            //Adjust the background image of the main menu to fit correctly
+            //on the screen. 
+            //I am using iPhone 5 retina assets so this adjusts them to be
+            //in line with iPhone 4's as well.
             if(stage.stageHeight < background.height){
-                trace(stage.stageHeight);
-                trace(background.height);
-                trace(background.y);
                 background.y = -(background.height - stage.stageHeight);
             }
 

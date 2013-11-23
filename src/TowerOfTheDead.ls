@@ -5,11 +5,7 @@ package
     import loom2d.display.StageScaleMode;
     import loom2d.display.DisplayObjectContainer;
     import loom2d.display.Sprite;
-    import loom2d.display.Image;
 
-    import loom2d.textures.Texture;
-    import loom2d.ui.SimpleLabel;
-    
     import totd.views.MainMenuView;
     import totd.views.GamePlayView;
     import totd.views.GameOverlayView;

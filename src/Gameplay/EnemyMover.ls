@@ -29,7 +29,6 @@ package totd.gameplay
          if(stopped)
             return;
 
-         var dt:Number = timeManager.TICK_RATE;
          y -= speed;
       }
 

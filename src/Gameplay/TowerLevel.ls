@@ -9,6 +9,7 @@ package totd.gameplay
    import loom2d.display.DisplayObjectContainer;
    import loom2d.display.Sprite;
    import loom2d.display.Image;
+   import loom2d.display.Quad;
    import loom2d.textures.Texture;
 
    import loom2d.events.Event;
@@ -43,26 +44,35 @@ package totd.gameplay
       [Inject]
       public var overlay:Sprite;
 
+      //Player Vars
       public var playerRenderer:PlayerRenderer;
       public var playerMover:PlayerMover;
       public var playerGameObject:LoomGameObject;
       public var playerTargetX:Number;
       public var playerTargetY:Number;
 
+      //Score Vars
       public var score:Number;
       public var scoreLabel:SimpleLabel;
 
+      //Enemy Vars
       public var enemies:Vector.<EnemyMover>;
       public var enemyPool:Vector.<LoomGameObject>;
       public var enemyGameObjects:Vector.<LoomGameObject>;
       static public var enemyBatch:DisplayObjectContainer;
 
+      //Enemy Spawn Timer
       public var spawnTimer:Timer;
       public var spawnRate:Number;
 
+      public var lightningTimer:Timer;
+      public var lightning:Quad; 
+
+      //Game Over
       public var onFinished:TowerLevelCompletionCallback;
       public var gameOver:Boolean = false;
 
+      //Parallax
       public var parallaxLayer1:Parallax;
       public var parallaxLayer2:Parallax;
 
@@ -74,11 +84,17 @@ package totd.gameplay
          createPlayer();
 
          this.owningGroup.registerManager(playerMover, null, "playerMover");
+
+         //Create Parallax
          parallaxLayer1 = new Parallax(); 
          parallaxLayer1.owningGroup = this.owningGroup;
          parallaxLayer1.displayObjectList = towerBackground();
          parallaxLayer1.parallax = 0.5;
          parallaxLayer1.initialize();
+
+         lightning = new Quad(playfield.stage.stageWidth, playfield.stage.stageHeight, 0xFFFFFF);
+         lightning.alpha = 0;
+         playfield.addChild(lightning);
 
          parallaxLayer2 = new Parallax(); 
          parallaxLayer2.owningGroup = this.owningGroup;
@@ -86,6 +102,7 @@ package totd.gameplay
          parallaxLayer2.parallax = 1;
          parallaxLayer2.initialize();
 
+         //Add Player
          playerGameObject.initialize();
 
          enemies = new Vector.<EnemyMover>();
@@ -99,9 +116,12 @@ package totd.gameplay
          spawnTimer = new Timer(500);
          spawnTimer.onComplete = createEnemyTimerComplete;
 
+         lightningTimer = new Timer(5000);
+         lightningTimer.onComplete = lightningTimerComplete;
+
          timeManager.addAnimatedObject(this);
          spawnTimer.start();
-
+         lightningTimer.start();
 
          scoreLabel = new SimpleLabel("assets/impact.fnt");
          scoreLabel.text = "0";
@@ -128,6 +148,19 @@ package totd.gameplay
          t.start();
       }
 
+      private function lightningTimerComplete(t:Timer=null):void
+      {
+         t.reset();
+         LoomTween.to(lightning, 0.5, {"alpha": 1, 
+                        "ease": LoomEaseType.EASE_OUT_BOUNCE}).onComplete += lightningTweenComplete;
+      }
+
+      private function lightningTweenComplete(tween:LoomTween)
+      {
+         lightning.alpha = 0; 
+         lightningTimer.start();
+      }
+      
       private function createEnemy():LoomGameObject
       {
          var enemyGameObject:LoomGameObject;

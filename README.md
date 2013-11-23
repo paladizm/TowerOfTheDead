@@ -5,6 +5,9 @@ This was a project I did for a gamejam in October 2013. The theme was Halloween 
 Tower of the Dead is a "climber" game where the player climbs a tower and dodges evil flaming skulls as they fall. The 
 score system is super simple the longer you last the higher your score. 
 
+<a href="http://i.imgur.com/7hEzIy1.jpg" target="_blank"><img src="http://i.imgur.com/7hEzIy1.jpg" width="160px" height="240px" /></a>
+<a href="http://i.imgur.com/fIZp1Vh.jpg" target="_blank"><img src="http://i.imgur.com/fIZp1Vh.jpg" width="160px" height="240px" /></a>
+
 Tech Used
 ---------
 
